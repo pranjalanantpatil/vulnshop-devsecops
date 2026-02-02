@@ -4,7 +4,7 @@ pipeline {
 
   stages {
 
-    stage('Clone Repo') {
+    stage('Checkout Code') {
       steps {
         git 'https://github.com/pranjalanantpatil/vulnshop-devsecops.git'
       }
@@ -30,7 +30,7 @@ pipeline {
       }
     }
 
-    stage('Build Docker Image') {
+    stage('Docker Build') {
       steps {
         sh 'docker build -t vulnshop .'
       }
