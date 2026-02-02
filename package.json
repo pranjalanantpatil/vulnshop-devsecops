@@ -1,0 +1,10 @@
+{
+  "name": "vulnshop",
+  "version": "1.0.0",
+  "description": "Vulnerable DevSecOps Demo App",
+  "main": "app.js",
+  "dependencies": {
+    "express": "4.16.0",
+    "lodash": "4.17.15"
+  }
+}
