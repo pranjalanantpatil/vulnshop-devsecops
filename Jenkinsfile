@@ -11,19 +11,16 @@ pipeline {
         }
 
 	stage('SonarQube Scan') {
-            tools {
-               sonarRunner 'sonar-scanner'
-            }
-            steps {
-               withSonarQubeEnv('sonar') {
-                   sh '''
-                   sonar-scanner \
-                   -Dsonar.projectKey=vulnshop \
-                   -Dsonar.sources=.
-                   '''
-                }
-            }
-         }
+             steps {
+                 withSonarQubeEnv('sonar') {
+                      sh '''
+                      /opt/sonar-scanner/bin/sonar-scanner \
+                      -Dsonar.projectKey=vulnshop \
+                      -Dsonar.sources=.
+                      '''
+                 }
+              }
+        }
 
         
         stage('Gitleaks Scan') {
