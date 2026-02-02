@@ -10,15 +10,22 @@ pipeline {
             }
         }
 
-        stage('SonarQube Scan') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh 'sonar-scanner -Dsonar.projectKey=vulnshop -Dsonar.sources=.'
-
-                }
+	stage('SonarQube Scan') {
+            tools {
+                sonarScanner 'sonar-scanner'
             }
-        }
+            steps {
+                 withSonarQubeEnv('sonar') {
+                     sh '''
+                     sonar-scanner \
+                     -Dsonar.projectKey=vulnshop \
+                     -Dsonar.sources=.
+                     '''
+                 }
+             }
+         }
 
+        
         stage('Gitleaks Scan') {
             steps {
                 sh 'gitleaks detect --source .'
