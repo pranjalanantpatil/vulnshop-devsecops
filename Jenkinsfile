@@ -13,7 +13,8 @@ pipeline {
         stage('SonarQube Scan') {
             steps {
                 withSonarQubeEnv('sonar') {
-                    sh 'sonar-scanner'
+                    sh 'sonar-scanner -Dsonar.projectKey=vulnshop -Dsonar.sources=.'
+
                 }
             }
         }
