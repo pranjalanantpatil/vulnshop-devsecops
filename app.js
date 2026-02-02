@@ -6,7 +6,7 @@ const adminUser = "admin"
 const adminPass = "admin123"
 
 // Fake secret key (Gitleaks detection)
-const AWS_SECRET_KEY = "AKIA999988887777SECRETKEY"
+const AWS_SECRET_KEY = process.env.AWS_SECRET_KEY
 
 app.get("/", (req,res)=>{
     res.send(`
