@@ -1,0 +1,46 @@
+pipeline {
+
+  agent any
+
+  stages {
+
+    stage('Clone Repo') {
+      steps {
+        git 'https://github.com/pranjalanantpatil/vulnshop-devsecops.git'
+      }
+    }
+
+    stage('SonarQube Scan') {
+      steps {
+        withSonarQubeEnv('sonar') {
+          sh 'sonar-scanner'
+        }
+      }
+    }
+
+    stage('Gitleaks Scan') {
+      steps {
+        sh 'gitleaks detect --source .'
+      }
+    }
+
+    stage('Dependency Check') {
+      steps {
+        sh 'dependency-check --scan .'
+      }
+    }
+
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t vulnshop .'
+      }
+    }
+
+    stage('Trivy Scan') {
+      steps {
+        sh 'trivy image vulnshop'
+      }
+    }
+
+  }
+}
