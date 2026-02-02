@@ -25,7 +25,8 @@ pipeline {
         
         stage('Gitleaks Scan') {
             steps {
-                sh 'gitleaks detect --source .'
+                sh 'gitleaks detect --source . --config .gitleaks.toml'
+
             }
         }
 
