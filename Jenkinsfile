@@ -12,17 +12,17 @@ pipeline {
 
 	stage('SonarQube Scan') {
             tools {
-                sonarScanner 'sonar-scanner'
+               sonarRunner 'sonar-scanner'
             }
             steps {
-                 withSonarQubeEnv('sonar') {
-                     sh '''
-                     sonar-scanner \
-                     -Dsonar.projectKey=vulnshop \
-                     -Dsonar.sources=.
-                     '''
-                 }
-             }
+               withSonarQubeEnv('sonar') {
+                   sh '''
+                   sonar-scanner \
+                   -Dsonar.projectKey=vulnshop \
+                   -Dsonar.sources=.
+                   '''
+                }
+            }
          }
 
         
